@@ -1,0 +1,107 @@
+Microsoft Windows [Version 10.0.19044.2006]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password: *********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 39
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+//Menampilkan databse
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.002 sec)
+
+
+//Membuat database
+MariaDB [(none)]> CREATE DATABASES dbpegawai;
+
+MariaDB [(none)]> create database dbpegawai;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dbpegawai          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+//Memilih DB yang akan digunakan
+
+MariaDB [(none)]> use dbpegawai
+Database changed
+MariaDB [dbpegawai]> show tables
+    -> ;
+Empty set (0.001 sec)
+
+//Membuat table pegawai
+MariaDB [dbpegawai]> create table divisi (
+    -> id int primary key auto_increment,
+    -> nama varchar(30) unique not null
+    -> );
+Query OK, 0 rows affected (0.032 sec)
+
+//Menampilkan table
+MariaDB [dbpegawai]> show tables
+    -> ;
++---------------------+
+| Tables_in_dbpegawai |
++---------------------+
+| divisi              |
++---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [dbpegawai]> create table pegawai (
+    -> id int primary key auto_increment,
+    -> nip char(5) unique not null,
+    -> nama varchar(30) not null,
+    -> gender enum('L','P') not null,
+    -> mp_lahir varchar(30) not null,
+    -> tgl_lahir date not null,
+    -> iddivisi int,
+    -> alamat text,
+    -> FOREIGN KEY (iddivisi) REFERENCES divisi (id)
+    -> );
+Query OK, 0 rows affected (0.034 sec)
+
+MariaDB [dbpegawai]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dbpegawai          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [dbpegawai]> show tables;
++---------------------+
+| Tables_in_dbpegawai |
++---------------------+
+| divisi              |
+| pegawai             |
++---------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [dbpegawai]>
