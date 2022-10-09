@@ -1,0 +1,160 @@
+
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dbpegawai          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use dbpegawai
+Database changed
+MariaDB [dbpegawai]> select * from divisi;
++----+-----------+
+| id | nama      |
++----+-----------+
+|  4 | IT        |
+|  2 | Keuangan  |
+|  3 | Marketing |
+|  1 | SDM       |
++----+-----------+
+4 rows in set (0.000 sec)
+
+// INSERT Data
+MariaDB [dbpegawai]> insert into divisi (id, nama) values
+(4, 'IT'),
+(2, 'Keuangan'),
+(3, 'Marketing'),
+(1, 'SDM');
+
+// INSERT Data
+MariaDB [dbpegawai]> insert into pegawai (id, nip, nama, gender, tmp_lahir, tgl_lahir, iddivisi, alamat) values
+(1, '100', 'Trudie', 'L', 'Palembang', '1992-06-24', 1, 'Klampis'),
+(2, '101', 'Elmira', 'L', 'Malang', '1992-01-16', 3, 'Kenjeran'),
+(3, '102', 'Agathe', 'P', 'Makasar', '1991-11-29', 3, 'Klampis'),
+(4, '103', 'Odessa', 'L', 'Bali', '1990-02-23', 3, 'Keputih'),
+(5, '104', 'Roslyn', 'P', 'Palembang', '1991-10-03', 3, 'Kenjeran'),
+(6, '105', 'Stacey', 'P', 'Bandung', '1992-12-30', 4, 'Kenjeran'),
+(7, '106', 'Phedra', 'P', 'Surabaya', '1992-07-10', 1, 'Keputih Tegal'),
+(8, '107', 'Mathilda', 'P', 'Malang', '1990-11-22', 4, 'Mulyorejo'),
+(9, '108', 'Letizia', 'L', 'Jakarta', '1991-02-06', 4, 'Keputih'),
+(10, '109', 'Olivette', 'P', 'Jakarta', '1990-04-28', 4, 'Keputih Tegal'),
+(11, '110', 'Brena', 'P', 'Bali', '1990-07-18', 2, 'Klampis'),
+(12, '111', 'Eugine', 'P', 'Probolinggo', '1990-08-12', 1, 'Mulyorejo'),
+(13, '112', 'Alleen', 'P', 'Makasar', '1991-03-23', 3, 'Kenjeran'),
+(14, '113', 'Mallory', 'P', 'Malang', '1991-10-10', 1, 'Perumdos Block J ITS'),
+(15, '114', 'Ericka', 'P', 'Surabaya', '1991-03-15', 4, 'Klampis'),
+(16, '115', 'Valli', 'L', 'Probolinggo', '1992-11-07', 3, 'Mulyosari'),
+(17, '116', 'Hollie', 'P', 'Bandung', '1991-08-05', 1, 'Mulyosari'),
+(18, '117', 'Constance', 'P', 'Bali', '1990-04-12', 3, 'Mulyorejo'),
+(19, '118', 'Clo', 'L', 'Bandung', '1992-05-16', 4, 'Mulyorejo'),
+(20, '119', 'Minne', 'L', 'Probolinggo', '1991-08-24', 2, 'Kenjeran');
+
+
+MariaDB [dbpegawai]> select * from pegawai;
++----+-----+-----------+--------+-------------+------------+----------+----------------------+
+| id | nip | nama      | gender | tmp_lahir   | tgl_lahir  | iddivisi | alamat               |
++----+-----+-----------+--------+-------------+------------+----------+----------------------+
+|  1 | 100 | Trudie    | L      | Palembang   | 1992-06-24 |        1 | Klampis              |
+|  2 | 101 | Elmira    | L      | Malang      | 1992-01-16 |        3 | Kenjeran             |
+|  3 | 102 | Agathe    | P      | Makasar     | 1991-11-29 |        3 | Klampis              |
+|  4 | 103 | Odessa    | L      | Bali        | 1990-02-23 |        3 | Keputih              |
+|  5 | 104 | Roslyn    | P      | Palembang   | 1991-10-03 |        3 | Kenjeran             |
+|  6 | 105 | Stacey    | P      | Bandung     | 1992-12-30 |        4 | Kenjeran             |
+|  7 | 106 | Phedra    | P      | Surabaya    | 1992-07-10 |        1 | Keputih Tegal        |
+|  8 | 107 | Mathilda  | P      | Malang      | 1990-11-22 |        4 | Mulyorejo            |
+|  9 | 108 | Letizia   | L      | Jakarta     | 1991-02-06 |        4 | Keputih              |
+| 10 | 109 | Olivette  | P      | Jakarta     | 1990-04-28 |        4 | Keputih Tegal        |
+| 11 | 110 | Brena     | P      | Bali        | 1990-07-18 |        2 | Klampis              |
+| 12 | 111 | Eugine    | P      | Probolinggo | 1990-08-12 |        1 | Mulyorejo            |
+| 13 | 112 | Alleen    | P      | Makasar     | 1991-03-23 |        3 | Kenjeran             |
+| 14 | 113 | Mallory   | P      | Malang      | 1991-10-10 |        1 | Perumdos Block J ITS |
+| 15 | 114 | Ericka    | P      | Surabaya    | 1991-03-15 |        4 | Klampis              |
+| 16 | 115 | Valli     | L      | Probolinggo | 1992-11-07 |        3 | Mulyosari            |
+| 17 | 116 | Hollie    | P      | Bandung     | 1991-08-05 |        1 | Mulyosari            |
+| 18 | 117 | Constance | P      | Bali        | 1990-04-12 |        3 | Mulyorejo            |
+| 19 | 118 | Clo       | L      | Bandung     | 1992-05-16 |        4 | Mulyorejo            |
+| 20 | 119 | Minne     | L      | Probolinggo | 1991-08-24 |        2 | Kenjeran             |
++----+-----+-----------+--------+-------------+------------+----------+----------------------+
+20 rows in set (0.001 sec)
+
+
+MariaDB [dbpegawai]> DELETE FROM pegawai WHERE id=19 AND id=20;
+Query OK, 2 row affected (0.002 sec)
+
+MariaDB [dbpegawai]> select * from pegawai;
++----+-----+-----------+--------+-------------+------------+----------+----------------------+
+| id | nip | nama      | gender | tmp_lahir   | tgl_lahir  | iddivisi | alamat               |
++----+-----+-----------+--------+-------------+------------+----------+----------------------+
+|  1 | 100 | Trudie    | L      | Palembang   | 1992-06-24 |        1 | Klampis              |
+|  2 | 101 | Elmira    | L      | Malang      | 1992-01-16 |        3 | Kenjeran             |
+|  3 | 102 | Agathe    | P      | Makasar     | 1991-11-29 |        3 | Klampis              |
+|  4 | 103 | Odessa    | L      | Bali        | 1990-02-23 |        3 | Keputih              |
+|  5 | 104 | Roslyn    | P      | Palembang   | 1991-10-03 |        3 | Kenjeran             |
+|  6 | 105 | Stacey    | P      | Bandung     | 1992-12-30 |        4 | Kenjeran             |
+|  7 | 106 | Phedra    | P      | Surabaya    | 1992-07-10 |        1 | Keputih Tegal        |
+|  8 | 107 | Mathilda  | P      | Malang      | 1990-11-22 |        4 | Mulyorejo            |
+|  9 | 108 | Letizia   | L      | Jakarta     | 1991-02-06 |        4 | Keputih              |
+| 10 | 109 | Olivette  | P      | Jakarta     | 1990-04-28 |        4 | Keputih Tegal        |
+| 11 | 110 | Brena     | P      | Bali        | 1990-07-18 |        2 | Klampis              |
+| 12 | 111 | Eugine    | P      | Probolinggo | 1990-08-12 |        1 | Mulyorejo            |
+| 13 | 112 | Alleen    | P      | Makasar     | 1991-03-23 |        3 | Kenjeran             |
+| 14 | 113 | Mallory   | P      | Malang      | 1991-10-10 |        1 | Perumdos Block J ITS |
+| 15 | 114 | Ericka    | P      | Surabaya    | 1991-03-15 |        4 | Klampis              |
+| 16 | 115 | Valli     | L      | Probolinggo | 1992-11-07 |        3 | Mulyosari            |
+| 17 | 116 | Hollie    | P      | Bandung     | 1991-08-05 |        1 | Mulyosari            |
+| 18 | 117 | Constance | P      | Bali        | 1990-04-12 |        3 | Mulyorejo            |
++----+-----+-----------+--------+-------------+------------+----------+----------------------+
+18 rows in set (0.001 sec)
+
+
+MariaDB [dbpegawai]> UPDATE pegawai
+    -> SET nama = 'Ucup', tmp_lahir = 'sukabumi', iddivisi = 2
+    -> WHERE id=18;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [dbpegawai]> UPDATE pegawai
+    -> SET nama = 'Otong', tmp_lahir = 'Sumedang', iddivisi = 3
+    -> WHERE id=17;
+Query OK, 1 row affected (1.592 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [dbpegawai]> UPDATE pegawai
+    -> SET nama = 'Dadang', tmp_lahir = 'Cilacap', iddivisi = 4
+    -> WHERE id=16;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [dbpegawai]> select * from pegawai;
++----+-----+----------+--------+-------------+------------+----------+----------------------+
+| id | nip | nama     | gender | tmp_lahir   | tgl_lahir  | iddivisi | alamat               |
++----+-----+----------+--------+-------------+------------+----------+----------------------+
+|  1 | 100 | Trudie   | L      | Palembang   | 1992-06-24 |        1 | Klampis              |
+|  2 | 101 | Elmira   | L      | Malang      | 1992-01-16 |        3 | Kenjeran             |
+|  3 | 102 | Agathe   | P      | Makasar     | 1991-11-29 |        3 | Klampis              |
+|  4 | 103 | Odessa   | L      | Bali        | 1990-02-23 |        3 | Keputih              |
+|  5 | 104 | Roslyn   | P      | Palembang   | 1991-10-03 |        3 | Kenjeran             |
+|  6 | 105 | Stacey   | P      | Bandung     | 1992-12-30 |        4 | Kenjeran             |
+|  7 | 106 | Phedra   | P      | Surabaya    | 1992-07-10 |        1 | Keputih Tegal        |
+|  8 | 107 | Mathilda | P      | Malang      | 1990-11-22 |        4 | Mulyorejo            |
+|  9 | 108 | Letizia  | L      | Jakarta     | 1991-02-06 |        4 | Keputih              |
+| 10 | 109 | Olivette | P      | Jakarta     | 1990-04-28 |        4 | Keputih Tegal        |
+| 11 | 110 | Brena    | P      | Bali        | 1990-07-18 |        2 | Klampis              |
+| 12 | 111 | Eugine   | P      | Probolinggo | 1990-08-12 |        1 | Mulyorejo            |
+| 13 | 112 | Alleen   | P      | Makasar     | 1991-03-23 |        3 | Kenjeran             |
+| 14 | 113 | Mallory  | P      | Malang      | 1991-10-10 |        1 | Perumdos Block J ITS |
+| 15 | 114 | Ericka   | P      | Surabaya    | 1991-03-15 |        4 | Klampis              |
+| 16 | 115 | Dadang   | L      | Cilacap     | 1992-11-07 |        4 | Mulyosari            |
+| 17 | 116 | Otong    | P      | Sumedang    | 1991-08-05 |        3 | Mulyosari            |
+| 18 | 117 | Ucup     | P      | sukabumi    | 1990-04-12 |        2 | Mulyorejo            |
++----+-----+----------+--------+-------------+------------+----------+----------------------+
+18 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]>
