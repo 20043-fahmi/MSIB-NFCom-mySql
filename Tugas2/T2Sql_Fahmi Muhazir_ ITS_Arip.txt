@@ -157,4 +157,3 @@ MariaDB [dbpegawai]> select * from pegawai;
 +----+-----+----------+--------+-------------+------------+----------+----------------------+
 18 rows in set (0.000 sec)
 
-MariaDB [dbpegawai]>

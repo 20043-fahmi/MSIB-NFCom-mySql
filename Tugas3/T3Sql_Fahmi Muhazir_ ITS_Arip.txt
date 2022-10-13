@@ -1,0 +1,399 @@
+Setting environment for using XAMPP for Windows.
+Fahmi@DESKTOP-LLOO4EL c:\xampp
+# mysql -u root -p
+Enter password: *********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| dbpegawai          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.033 sec)
+
+MariaDB [(none)]> use dbpegawai
+Database changed
+MariaDB [dbpegawai]> show tables
+    -> ;
++---------------------+
+| Tables_in_dbpegawai |
++---------------------+
+| divisi              |
+| pegawai             |
++---------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [dbpegawai]> describe pegawai;
++-----------+---------------+------+-----+---------+----------------+
+| Field     | Type          | Null | Key | Default | Extra          |
++-----------+---------------+------+-----+---------+----------------+
+| id        | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nip       | char(3)       | YES  | UNI | NULL    |                |
+| nama      | varchar(30)   | NO   |     | NULL    |                |
+| gender    | enum('L','P') | NO   |     | NULL    |                |
+| tmp_lahir | varchar(30)   | NO   |     | NULL    |                |
+| tgl_lahir | date          | NO   |     | NULL    |                |
+| iddivisi  | int(11)       | YES  | MUL | NULL    |                |
+| alamat    | text          | YES  |     | NULL    |                |
+| bbadan    | int(11)       | YES  |     | NULL    |                |
++-----------+---------------+------+-----+---------+----------------+
+9 rows in set (0.084 sec)
+
+MariaDB [dbpegawai]> select * from pegawai;
++----+------+----------+--------+-------------+------------+----------+----------------------+--------+
+| id | nip  | nama     | gender | tmp_lahir   | tgl_lahir  | iddivisi | alamat               | bbadan |
++----+------+----------+--------+-------------+------------+----------+----------------------+--------+
+|  1 | 100  | Trudie   | L      | Palembang   | 1992-06-24 |        1 | Klampis              |     55 |
+|  2 | 101  | Elmira   | L      | Malang      | 1992-01-16 |        3 | Kenjeran             |     56 |
+|  3 | 102  | Agathe   | P      | Makasar     | 1991-11-29 |        3 | Klampis              |     66 |
+|  4 | 103  | Odessa   | L      | Bali        | 1990-02-23 |        3 | Keputih              |     59 |
+|  5 | 104  | Roslyn   | P      | Palembang   | 1991-10-03 |        3 | Kenjeran             |     48 |
+|  6 | 105  | Stacey   | P      | Bandung     | 1992-12-30 |        4 | Kenjeran             |     50 |
+|  7 | 106  | Phedra   | P      | Surabaya    | 1992-07-10 |        1 | Keputih Tegal        |     57 |
+|  8 | 107  | Mathilda | P      | Malang      | 1990-11-22 |        4 | Mulyorejo            |     53 |
+|  9 | 108  | Letizia  | L      | Jakarta     | 1991-02-06 |        4 | Keputih              |     51 |
+| 10 | 109  | Olivette | P      | Jakarta     | 1990-04-28 |        4 | Keputih Tegal        |     61 |
+| 11 | 110  | Brena    | P      | Bali        | 1990-07-18 |        2 | Klampis              |     67 |
+| 12 | 111  | Eugine   | P      | Probolinggo | 1990-08-12 |        1 | Mulyorejo            |     70 |
+| 13 | 112  | Alleen   | P      | Makasar     | 1991-03-23 |        3 | Kenjeran             |     69 |
+| 14 | 113  | Mallory  | P      | Malang      | 1991-10-10 |        1 | Perumdos Block J ITS |     62 |
+| 15 | 114  | Ericka   | P      | Surabaya    | 1991-03-15 |        4 | Klampis              |     54 |
+| 16 | 115  | Dadang   | L      | Cilacap     | 1992-11-07 |        4 | Mulyosari            |     55 |
+| 17 | 116  | Otong    | P      | Sumedang    | 1991-08-05 |        3 | Mulyosari            |     65 |
+| 18 | 117  | Ucup     | P      | sukabumi    | 1990-04-12 |        2 | Mulyorejo            |     54 |
++----+------+----------+--------+-------------+------------+----------+----------------------+--------+
+18 rows in set (0.064 sec)
+
+MariaDB [dbpegawai]> select nama, gender, tmp_lahir from pegawai;
++----------+--------+-------------+
+| nama     | gender | tmp_lahir   |
++----------+--------+-------------+
+| Trudie   | L      | Palembang   |
+| Elmira   | L      | Malang      |
+| Agathe   | P      | Makasar     |
+| Odessa   | L      | Bali        |
+| Roslyn   | P      | Palembang   |
+| Stacey   | P      | Bandung     |
+| Phedra   | P      | Surabaya    |
+| Mathilda | P      | Malang      |
+| Letizia  | L      | Jakarta     |
+| Olivette | P      | Jakarta     |
+| Brena    | P      | Bali        |
+| Eugine   | P      | Probolinggo |
+| Alleen   | P      | Makasar     |
+| Mallory  | P      | Malang      |
+| Ericka   | P      | Surabaya    |
+| Dadang   | L      | Cilacap     |
+| Otong    | P      | Sumedang    |
+| Ucup     | P      | sukabumi    |
++----------+--------+-------------+
+18 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]> select nama from pegawai;
++----------+
+| nama     |
++----------+
+| Trudie   |
+| Elmira   |
+| Agathe   |
+| Odessa   |
+| Roslyn   |
+| Stacey   |
+| Phedra   |
+| Mathilda |
+| Letizia  |
+| Olivette |
+| Brena    |
+| Eugine   |
+| Alleen   |
+| Mallory  |
+| Ericka   |
+| Dadang   |
+| Otong    |
+| Ucup     |
++----------+
+18 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]> SELECT nama,tgl_lahir, usia, tmp_lahir
+    -> FROM (SELECT nama,tgl_lahir, tmp_lahir, TIMESTAMPDIFF(YEAR , tgl_lahir, NOW()) AS usia
+    -> FROM pegawai) AS filterPegawai
+    -> WHERE tmp_lahir = 'Jakarta' and usia >= 30;
++----------+------------+------+-----------+
+| nama     | tgl_lahir  | usia | tmp_lahir |
++----------+------------+------+-----------+
+| Letizia  | 1991-02-06 |   31 | Jakarta   |
+| Olivette | 1990-04-28 |   32 | Jakarta   |
++----------+------------+------+-----------+
+2 rows in set (0.024 sec)
+
+MariaDB [dbpegawai]> select * from pegawai where nip = '117';
++----+------+------+--------+-----------+------------+----------+-----------+--------+
+| id | nip  | nama | gender | tmp_lahir | tgl_lahir  | iddivisi | alamat    | bbadan |
++----+------+------+--------+-----------+------------+----------+-----------+--------+
+| 18 | 117  | Ucup | P      | sukabumi  | 1990-04-12 |        2 | Mulyorejo |     54 |
++----+------+------+--------+-----------+------------+----------+-----------+--------+
+1 row in set (0.003 sec)
+
+MariaDB [dbpegawai]> select nama from pegawai where gender = 'L'
+    -> ;
++---------+
+| nama    |
++---------+
+| Trudie  |
+| Elmira  |
+| Odessa  |
+| Letizia |
+| Dadang  |
++---------+
+5 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]> select nama,nip from pegawai where nip in (100, 105, 111);
++--------+------+
+| nama   | nip  |
++--------+------+
+| Trudie | 100  |
+| Stacey | 105  |
+| Eugine | 111  |
++--------+------+
+3 rows in set (0.009 sec)
+
+MariaDB [dbpegawai]> select nama, nip from pegawai where nip not in (111,105,111);
++----------+------+
+| nama     | nip  |
++----------+------+
+| Trudie   | 100  |
+| Elmira   | 101  |
+| Agathe   | 102  |
+| Odessa   | 103  |
+| Roslyn   | 104  |
+| Phedra   | 106  |
+| Mathilda | 107  |
+| Letizia  | 108  |
+| Olivette | 109  |
+| Brena    | 110  |
+| Alleen   | 112  |
+| Mallory  | 113  |
+| Ericka   | 114  |
+| Dadang   | 115  |
+| Otong    | 116  |
+| Ucup     | 117  |
++----------+------+
+16 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]> select nama, tmp_lahir from pegawai where tmp_lahir not in ('Jakarta', 'Bandung', 'Sukabumi');
++----------+-------------+
+| nama     | tmp_lahir   |
++----------+-------------+
+| Trudie   | Palembang   |
+| Elmira   | Malang      |
+| Agathe   | Makasar     |
+| Odessa   | Bali        |
+| Roslyn   | Palembang   |
+| Phedra   | Surabaya    |
+| Mathilda | Malang      |
+| Brena    | Bali        |
+| Eugine   | Probolinggo |
+| Alleen   | Makasar     |
+| Mallory  | Malang      |
+| Ericka   | Surabaya    |
+| Dadang   | Cilacap     |
+| Otong    | Sumedang    |
++----------+-------------+
+14 rows in set (0.001 sec)
+
+MariaDB [dbpegawai]> select nama from pegawai order by nama asc;
++----------+
+| nama     |
++----------+
+| Agathe   |
+| Alleen   |
+| Brena    |
+| Dadang   |
+| Elmira   |
+| Ericka   |
+| Eugine   |
+| Letizia  |
+| Mallory  |
+| Mathilda |
+| Odessa   |
+| Olivette |
+| Otong    |
+| Phedra   |
+| Roslyn   |
+| Stacey   |
+| Trudie   |
+| Ucup     |
++----------+
+18 rows in set (0.002 sec)
+
+MariaDB [dbpegawai]> select nama, bbadan from pegawai order by bbadan desc
+    -> ;
++----------+--------+
+| nama     | bbadan |
++----------+--------+
+| Eugine   |     70 |
+| Alleen   |     69 |
+| Brena    |     67 |
+| Agathe   |     66 |
+| Otong    |     65 |
+| Mallory  |     62 |
+| Olivette |     61 |
+| Odessa   |     59 |
+| Phedra   |     57 |
+| Elmira   |     56 |
+| Dadang   |     55 |
+| Trudie   |     55 |
+| Ericka   |     54 |
+| Ucup     |     54 |
+| Mathilda |     53 |
+| Letizia  |     51 |
+| Stacey   |     50 |
+| Roslyn   |     48 |
++----------+--------+
+18 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]> select nama from pegawai limit 5;
++--------+
+| nama   |
++--------+
+| Trudie |
+| Elmira |
+| Agathe |
+| Odessa |
+| Roslyn |
++--------+
+5 rows in set (0.000 sec)
+
+MariaDB [dbpegawai]> select nama from pegawai limit 5 offset 12;
++---------+
+| nama    |
++---------+
+| Alleen  |
+| Mallory |
+| Ericka  |
+| Dadang  |
+| Otong   |
++---------+
+5 rows in set (0.001 sec)
+
+MariaDB [dbpegawai]> select count(nama) from pegawai;
++-------------+
+| count(nama) |
++-------------+
+|          18 |
++-------------+
+1 row in set (0.004 sec)
+
+MariaDB [dbpegawai]> SELECT nama,tgl_lahir, TIMESTAMPDIFF(
+    -> YEAR , tgl_lahir, NOW() ) AS usia FROM pegawai;
++----------+------------+------+
+| nama     | tgl_lahir  | usia |
++----------+------------+------+
+| Trudie   | 1992-06-24 |   30 |
+| Elmira   | 1992-01-16 |   30 |
+| Agathe   | 1991-11-29 |   30 |
+| Odessa   | 1990-02-23 |   32 |
+| Roslyn   | 1991-10-03 |   31 |
+| Stacey   | 1992-12-30 |   29 |
+| Phedra   | 1992-07-10 |   30 |
+| Mathilda | 1990-11-22 |   31 |
+| Letizia  | 1991-02-06 |   31 |
+| Olivette | 1990-04-28 |   32 |
+| Brena    | 1990-07-18 |   32 |
+| Eugine   | 1990-08-12 |   32 |
+| Alleen   | 1991-03-23 |   31 |
+| Mallory  | 1991-10-10 |   31 |
+| Ericka   | 1991-03-15 |   31 |
+| Dadang   | 1992-11-07 |   29 |
+| Otong    | 1991-08-05 |   31 |
+| Ucup     | 1990-04-12 |   32 |
++----------+------------+------+
+18 rows in set (0.001 sec)
+
+MariaDB [dbpegawai]> select nip, nama, MAX(usia)
+    -> from (SELECT nip,nama, TIMESTAMPDIFF(
+    -> YEAR , tgl_lahir, NOW() ) AS usia
+    -> FROM pegawai) as filterPegawai;
++------+--------+-----------+
+| nip  | nama   | MAX(usia) |
++------+--------+-----------+
+| 100  | Trudie |        32 |
++------+--------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [dbpegawai]> select nip, nama, MIN(usia)
+    -> from (SELECT nip,nama, TIMESTAMPDIFF(
+    -> YEAR , tgl_lahir, NOW() ) AS usia
+    -> FROM pegawai) as filterPegawai;
++------+--------+-----------+
+| nip  | nama   | MIN(usia) |
++------+--------+-----------+
+| 100  | Trudie |        29 |
++------+--------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [dbpegawai]> select nip, nama, bb
+    -> from (SELECT nip,nama, min(bbadan) as bb from pegawai) as filterPegawai2;
++------+--------+------+
+| nip  | nama   | bb   |
++------+--------+------+
+| 100  | Trudie |   48 |
++------+--------+------+
+1 row in set (0.001 sec)
+
+MariaDB [dbpegawai]> select nip, nama, AVG(usia)
+    -> from (SELECT nip,nama, TIMESTAMPDIFF(
+    -> YEAR , tgl_lahir, NOW() ) AS usia
+    -> FROM pegawai) as filterPegawai;
++------+--------+-----------+
+| nip  | nama   | AVG(usia) |
++------+--------+-----------+
+| 100  | Trudie |   30.8333 |
++------+--------+-----------+
+1 row in set (0.002 sec)
+
+MariaDB [dbpegawai]> select count(gender) from pegawai where gender = 'P';
++---------------+
+| count(gender) |
++---------------+
+|            13 |
++---------------+
+1 row in set (0.000 sec)
+
+MariaDB [dbpegawai]> select nip, nama, bb
+    -> from (SELECT nip,nama, sum(bbadan) as bb from pegawai) as filterPegawai2;
++------+--------+------+
+| nip  | nama   | bb   |
++------+--------+------+
+| 100  | Trudie | 1052 |
++------+--------+------+
+1 row in set (0.001 sec)
+
+MariaDB [dbpegawai]> select nama gender from pegawai group by gender having count(gender) < 11;
++--------+
+| gender |
++--------+
+| Trudie |
++--------+
+1 row in set, 1 warning (0.003 sec)
+
+MariaDB [dbpegawai]> select nama, gender from pegawai group by gender having count(gender) < 11;
++--------+--------+
+| nama   | gender |
++--------+--------+
+| Trudie | L      |
++--------+--------+
+1 row in set (0.000 sec)
