@@ -1,4 +1,6 @@
 Setting environment for using XAMPP for Windows.
+-- Karena folder sedang error jadi pakai shell yang ada di xampp
+-- untuk masuk melalu cmd bisa dengan command --> cd C:/ xampp/mysql/bin
 Fahmi@DESKTOP-LLOO4EL c:\xampp
 # mysql -u root -p
 Enter password: *********
@@ -24,6 +26,7 @@ MariaDB [(none)]> show databases
 +--------------------+
 6 rows in set (0.033 sec)
 
+-- tampilkan tabel yang ada di dbpegawai
 MariaDB [(none)]> use dbpegawai
 Database changed
 MariaDB [dbpegawai]> show tables
@@ -36,6 +39,7 @@ MariaDB [dbpegawai]> show tables
 +---------------------+
 2 rows in set (0.001 sec)
 
+-- tampilkan deskripsi tabel yang ada di dbpegawai
 MariaDB [dbpegawai]> describe pegawai;
 +-----------+---------------+------+-----+---------+----------------+
 | Field     | Type          | Null | Key | Default | Extra          |
@@ -52,6 +56,16 @@ MariaDB [dbpegawai]> describe pegawai;
 +-----------+---------------+------+-----+---------+----------------+
 9 rows in set (0.084 sec)
 
+-- Pada query sebelum nya telah dilakukan alter table untuk menambahkan colom dengan query berikut
+alter table pegawai
+ADD bbadan int
+
+-- Setelah itu dilakukan update utntuk menambahkan data pada column bbadan dengan query
+UPDATE pegawai
+SET bbadan = 55
+WHERE nip = 100;
+
+-- tampilkan seluruh data staff
 MariaDB [dbpegawai]> select * from pegawai;
 +----+------+----------+--------+-------------+------------+----------+----------------------+--------+
 | id | nip  | nama     | gender | tmp_lahir   | tgl_lahir  | iddivisi | alamat               | bbadan |
@@ -77,6 +91,7 @@ MariaDB [dbpegawai]> select * from pegawai;
 +----+------+----------+--------+-------------+------------+----------+----------------------+--------+
 18 rows in set (0.064 sec)
 
+-- tampilkan kolom2 tertentu di tabel staff (bebas, contoh: nip,nama,gender,umur)
 MariaDB [dbpegawai]> select nama, gender, tmp_lahir from pegawai;
 +----------+--------+-------------+
 | nama     | gender | tmp_lahir   |
@@ -102,31 +117,50 @@ MariaDB [dbpegawai]> select nama, gender, tmp_lahir from pegawai;
 +----------+--------+-------------+
 18 rows in set (0.000 sec)
 
-MariaDB [dbpegawai]> select nama from pegawai;
-+----------+
-| nama     |
-+----------+
-| Trudie   |
-| Elmira   |
-| Agathe   |
-| Odessa   |
-| Roslyn   |
-| Stacey   |
-| Phedra   |
-| Mathilda |
-| Letizia  |
-| Olivette |
-| Brena    |
-| Eugine   |
-| Alleen   |
-| Mallory  |
-| Ericka   |
-| Dadang   |
-| Otong    |
-| Ucup     |
-+----------+
+-- tampilkan baris2 tertentu di tabel staff (bebas, contoh: menampilkan yang gendernya laki2 saja)
+MariaDB [dbpegawai]> select * from pegawai where gender =  'L';
++----+------+---------+--------+-----------+------------+----------+-----------+--------+
+| id | nip  | nama    | gender | tmp_lahir | tgl_lahir  | iddivisi | alamat    | bbadan |
++----+------+---------+--------+-----------+------------+----------+-----------+--------+
+|  1 | 100  | Trudie  | L      | Palembang | 1992-06-24 |        1 | Klampis   |     55 |
+|  2 | 101  | Elmira  | L      | Malang    | 1992-01-16 |        3 | Kenjeran  |     56 |
+|  4 | 103  | Odessa  | L      | Bali      | 1990-02-23 |        3 | Keputih   |     59 |
+|  9 | 108  | Letizia | L      | Jakarta   | 1991-02-06 |        4 | Keputih   |     51 |
+| 16 | 115  | Dadang  | L      | Cilacap   | 1992-11-07 |        4 | Mulyosari |     55 |
++----+------+---------+--------+-----------+------------+----------+-----------+--------+
+5 rows in set (0.001 sec)
+
+-- tampilkan kolom2 dan baris2 tertentu di tabel staff (bebas)
+-- Sebenernya gak terlalu paham maksud kolom dan baris ini
+MariaDB [dbpegawai]> select * from pegawai;
++----+------+----------+--------+-------------+------------+----------+----------------------+--------+
+| id | nip  | nama     | gender | tmp_lahir   | tgl_lahir  | iddivisi | alamat               | bbadan |
++----+------+----------+--------+-------------+------------+----------+----------------------+--------+
+|  1 | 100  | Trudie   | L      | Palembang   | 1992-06-24 |        1 | Klampis              |     55 |
+|  2 | 101  | Elmira   | L      | Malang      | 1992-01-16 |        3 | Kenjeran             |     56 |
+|  3 | 102  | Agathe   | P      | Makasar     | 1991-11-29 |        3 | Klampis              |     66 |
+|  4 | 103  | Odessa   | L      | Bali        | 1990-02-23 |        3 | Keputih              |     59 |
+|  5 | 104  | Roslyn   | P      | Palembang   | 1991-10-03 |        3 | Kenjeran             |     48 |
+|  6 | 105  | Stacey   | P      | Bandung     | 1992-12-30 |        4 | Kenjeran             |     50 |
+|  7 | 106  | Phedra   | P      | Surabaya    | 1992-07-10 |        1 | Keputih Tegal        |     57 |
+|  8 | 107  | Mathilda | P      | Malang      | 1990-11-22 |        4 | Mulyorejo            |     53 |
+|  9 | 108  | Letizia  | L      | Jakarta     | 1991-02-06 |        4 | Keputih              |     51 |
+| 10 | 109  | Olivette | P      | Jakarta     | 1990-04-28 |        4 | Keputih Tegal        |     61 |
+| 11 | 110  | Brena    | P      | Bali        | 1990-07-18 |        2 | Klampis              |     67 |
+| 12 | 111  | Eugine   | P      | Probolinggo | 1990-08-12 |        1 | Mulyorejo            |     70 |
+| 13 | 112  | Alleen   | P      | Makasar     | 1991-03-23 |        3 | Kenjeran             |     69 |
+| 14 | 113  | Mallory  | P      | Malang      | 1991-10-10 |        1 | Perumdos Block J ITS |     62 |
+| 15 | 114  | Ericka   | P      | Surabaya    | 1991-03-15 |        4 | Klampis              |     54 |
+| 16 | 115  | Dadang   | L      | Cilacap     | 1992-11-07 |        4 | Mulyosari            |     55 |
+| 17 | 116  | Otong    | P      | Sumedang    | 1991-08-05 |        3 | Mulyosari            |     65 |
+| 18 | 117  | Ucup     | P      | sukabumi    | 1990-04-12 |        2 | Mulyorejo            |     54 |
++----+------+----------+--------+-------------+------------+----------+----------------------+--------+
 18 rows in set (0.000 sec)
 
+
+-- tampilkan data pegawai yang umurnya di atas 30 tahun 
+
+  dan lahirnya di kota jakarta
 MariaDB [dbpegawai]> SELECT nama,tgl_lahir, usia, tmp_lahir
     -> FROM (SELECT nama,tgl_lahir, tmp_lahir, TIMESTAMPDIFF(YEAR , tgl_lahir, NOW()) AS usia
     -> FROM pegawai) AS filterPegawai
@@ -139,6 +173,7 @@ MariaDB [dbpegawai]> SELECT nama,tgl_lahir, usia, tmp_lahir
 +----------+------------+------+-----------+
 2 rows in set (0.024 sec)
 
+-- tampilkan data pegawai dengan klausa key (nip)
 MariaDB [dbpegawai]> select * from pegawai where nip = '117';
 +----+------+------+--------+-----------+------------+----------+-----------+--------+
 | id | nip  | nama | gender | tmp_lahir | tgl_lahir  | iddivisi | alamat    | bbadan |
@@ -147,6 +182,7 @@ MariaDB [dbpegawai]> select * from pegawai where nip = '117';
 +----+------+------+--------+-----------+------------+----------+-----------+--------+
 1 row in set (0.003 sec)
 
+-- tampilkan data pegawai dengan klausa non key (gender)
 MariaDB [dbpegawai]> select nama from pegawai where gender = 'L'
     -> ;
 +---------+
@@ -160,6 +196,7 @@ MariaDB [dbpegawai]> select nama from pegawai where gender = 'L'
 +---------+
 5 rows in set (0.000 sec)
 
+-- tampilkan data pegawai dengan klausa in (menyebutkan beberapa nip)
 MariaDB [dbpegawai]> select nama,nip from pegawai where nip in (100, 105, 111);
 +--------+------+
 | nama   | nip  |
@@ -170,6 +207,7 @@ MariaDB [dbpegawai]> select nama,nip from pegawai where nip in (100, 105, 111);
 +--------+------+
 3 rows in set (0.009 sec)
 
+-- tampilkan data pegawai dengan klausa not in (menyebutkan beberapa tempat lahir)
 MariaDB [dbpegawai]> select nama, nip from pegawai where nip not in (111,105,111);
 +----------+------+
 | nama     | nip  |
@@ -214,6 +252,7 @@ MariaDB [dbpegawai]> select nama, tmp_lahir from pegawai where tmp_lahir not in 
 +----------+-------------+
 14 rows in set (0.001 sec)
 
+-- tampilkan data pegawai berdasarkan nama secara ascending
 MariaDB [dbpegawai]> select nama from pegawai order by nama asc;
 +----------+
 | nama     |
@@ -239,6 +278,7 @@ MariaDB [dbpegawai]> select nama from pegawai order by nama asc;
 +----------+
 18 rows in set (0.002 sec)
 
+-- tampilkan data pegawai dari yang berat badan paling gemuk ke paling kurus
 MariaDB [dbpegawai]> select nama, bbadan from pegawai order by bbadan desc
     -> ;
 +----------+--------+
@@ -265,6 +305,7 @@ MariaDB [dbpegawai]> select nama, bbadan from pegawai order by bbadan desc
 +----------+--------+
 18 rows in set (0.000 sec)
 
+-- tampilkan data 5 pegawai teratas gunakan klausa limit
 MariaDB [dbpegawai]> select nama from pegawai limit 5;
 +--------+
 | nama   |
@@ -277,6 +318,7 @@ MariaDB [dbpegawai]> select nama from pegawai limit 5;
 +--------+
 5 rows in set (0.000 sec)
 
+-- tampilkan data 5 pegawai terbawah gunakan klausa limit offset
 MariaDB [dbpegawai]> select nama from pegawai limit 5 offset 12;
 +---------+
 | nama    |
@@ -289,6 +331,7 @@ MariaDB [dbpegawai]> select nama from pegawai limit 5 offset 12;
 +---------+
 5 rows in set (0.001 sec)
 
+-- tampilkan jumlah pegawai gunakan fungsi aggregrat count
 MariaDB [dbpegawai]> select count(nama) from pegawai;
 +-------------+
 | count(nama) |
@@ -297,6 +340,7 @@ MariaDB [dbpegawai]> select count(nama) from pegawai;
 +-------------+
 1 row in set (0.004 sec)
 
+-- tampilkan nip,nama pegawai, umur yg paling tua gunakan fungsi aggregrat max (kombinasi dengan sub query)
 MariaDB [dbpegawai]> SELECT nama,tgl_lahir, TIMESTAMPDIFF(
     -> YEAR , tgl_lahir, NOW() ) AS usia FROM pegawai;
 +----------+------------+------+
@@ -345,6 +389,7 @@ MariaDB [dbpegawai]> select nip, nama, MIN(usia)
 +------+--------+-----------+
 1 row in set (0.001 sec)
 
+-- tampilkan nip,nama pegawai, berat_badan yg paling kurus gunakan fungsi aggregrat min (kombinasi dengan su
 MariaDB [dbpegawai]> select nip, nama, bb
     -> from (SELECT nip,nama, min(bbadan) as bb from pegawai) as filterPegawai2;
 +------+--------+------+
@@ -354,6 +399,7 @@ MariaDB [dbpegawai]> select nip, nama, bb
 +------+--------+------+
 1 row in set (0.001 sec)
 
+-- tampilkan data rata2 umur pegawai gunakan fungsi aggregrat avg
 MariaDB [dbpegawai]> select nip, nama, AVG(usia)
     -> from (SELECT nip,nama, TIMESTAMPDIFF(
     -> YEAR , tgl_lahir, NOW() ) AS usia
@@ -365,6 +411,16 @@ MariaDB [dbpegawai]> select nip, nama, AVG(usia)
 +------+--------+-----------+
 1 row in set (0.002 sec)
 
+-- tampilkan jumlah data pegawai yang laki2 gunakan fungsi aggregrat count
+MariaDB [dbpegawai]> select count(gender) from pegawai where gender = 'L';
++---------------+
+| count(gender) |
++---------------+
+|             5 |
++---------------+
+1 row in set (0.000 sec)
+
+-- tampilkan jumlah data pegawai yang perempuan gunakan fungsi aggregrat count
 MariaDB [dbpegawai]> select count(gender) from pegawai where gender = 'P';
 +---------------+
 | count(gender) |
@@ -373,6 +429,7 @@ MariaDB [dbpegawai]> select count(gender) from pegawai where gender = 'P';
 +---------------+
 1 row in set (0.000 sec)
 
+-- tampilkan total berat badan seluruh pegawai gunakan fungsi aggregrat sum
 MariaDB [dbpegawai]> select nip, nama, bb
     -> from (SELECT nip,nama, sum(bbadan) as bb from pegawai) as filterPegawai2;
 +------+--------+------+
@@ -382,18 +439,15 @@ MariaDB [dbpegawai]> select nip, nama, bb
 +------+--------+------+
 1 row in set (0.001 sec)
 
-MariaDB [dbpegawai]> select nama gender from pegawai group by gender having count(gender) < 11;
-+--------+
-| gender |
-+--------+
-| Trudie |
-+--------+
-1 row in set, 1 warning (0.003 sec)
+-- tampilkan data jumlah pegawai berdasarkan gender, yg jumlah minimal 10 orang (gunakan group by dan having)
 
-MariaDB [dbpegawai]> select nama, gender from pegawai group by gender having count(gender) < 11;
-+--------+--------+
-| nama   | gender |
-+--------+--------+
-| Trudie | L      |
-+--------+--------+
-1 row in set (0.000 sec)
+MariaDB [dbpegawai]> SELECT COUNT(gender)
+    -> FROM pegawai
+    -> GROUP BY gender
+    -> HAVING count(gender) > 10;
++---------------+
+| COUNT(gender) |
++---------------+
+|            13 |
++---------------+
+1 row in set (0.001 sec)
