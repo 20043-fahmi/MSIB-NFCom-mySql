@@ -1,0 +1,99 @@
+MariaDB [dbtugas5]> SELECT employees.firstName, employees.lastName, employees.employeeNumber, employees.jobTitle, offices.officeCode, offices.city, offices.phone
+    -> FROM employees
+    -> INNER JOIN offices
+    -> ON employees.officeCode = offices.officeCode;
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+| firstName | lastName  | employeeNumber | jobTitle             | officeCode | city          | phone            |
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+| Diane     | Murphy    |           1002 | President            | 1          | San Francisco | +1 650 219 4782  |
+| Mary      | Patterson |           1056 | VP Sales             | 1          | San Francisco | +1 650 219 4782  |
+| Jeff      | Firrelli  |           1076 | VP Marketing         | 1          | San Francisco | +1 650 219 4782  |
+| Anthony   | Bow       |           1143 | Sales Manager (NA)   | 1          | San Francisco | +1 650 219 4782  |
+| Leslie    | Jennings  |           1165 | Sales Rep            | 1          | San Francisco | +1 650 219 4782  |
+| Leslie    | Thompson  |           1166 | Sales Rep            | 1          | San Francisco | +1 650 219 4782  |
+| Julie     | Firrelli  |           1188 | Sales Rep            | 2          | Boston        | +1 215 837 0825  |
+| Steve     | Patterson |           1216 | Sales Rep            | 2          | Boston        | +1 215 837 0825  |
+| Foon Yue  | Tseng     |           1286 | Sales Rep            | 3          | NYC           | +1 212 555 3000  |
+| George    | Vanauf    |           1323 | Sales Rep            | 3          | NYC           | +1 212 555 3000  |
+| Gerard    | Bondur    |           1102 | Sale Manager (EMEA)  | 4          | Paris         | +33 14 723 4404  |
+| Loui      | Bondur    |           1337 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Gerard    | Hernandez |           1370 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Pamela    | Castillo  |           1401 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Martin    | Gerard    |           1702 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Mami      | Nishi     |           1621 | Sales Rep            | 5          | Tokyo         | +81 33 224 5000  |
+| Yoshimi   | Kato      |           1625 | Sales Rep            | 5          | Tokyo         | +81 33 224 5000  |
+| William   | Patterson |           1088 | Sales Manager (APAC) | 6          | Sydney        | +61 2 9264 2451  |
+| Andy      | Fixter    |           1611 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Peter     | Marsh     |           1612 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Tom       | King      |           1619 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Larry     | Bott      |           1501 | Sales Rep            | 7          | London        | +44 20 7877 2041 |
+| Barry     | Jones     |           1504 | Sales Rep            | 7          | London        | +44 20 7877 2041 |
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+23 rows in set (0.000 sec)
+
+SELECT e.firstName, e.lastName, e.employeeNumber, e.jobTitle, o.officeCode, o.city, o.phone
+    -> FROM employees as e
+    -> INNER JOIN offices as o
+    -> ON e.officeCode = o.officeCode;
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+| firstName | lastName  | employeeNumber | jobTitle             | officeCode | city          | phone            |
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+| Diane     | Murphy    |           1002 | President            | 1          | San Francisco | +1 650 219 4782  |
+| Mary      | Patterson |           1056 | VP Sales             | 1          | San Francisco | +1 650 219 4782  |
+| Jeff      | Firrelli  |           1076 | VP Marketing         | 1          | San Francisco | +1 650 219 4782  |
+| Anthony   | Bow       |           1143 | Sales Manager (NA)   | 1          | San Francisco | +1 650 219 4782  |
+| Leslie    | Jennings  |           1165 | Sales Rep            | 1          | San Francisco | +1 650 219 4782  |
+| Leslie    | Thompson  |           1166 | Sales Rep            | 1          | San Francisco | +1 650 219 4782  |
+| Julie     | Firrelli  |           1188 | Sales Rep            | 2          | Boston        | +1 215 837 0825  |
+| Steve     | Patterson |           1216 | Sales Rep            | 2          | Boston        | +1 215 837 0825  |
+| Foon Yue  | Tseng     |           1286 | Sales Rep            | 3          | NYC           | +1 212 555 3000  |
+| George    | Vanauf    |           1323 | Sales Rep            | 3          | NYC           | +1 212 555 3000  |
+| Gerard    | Bondur    |           1102 | Sale Manager (EMEA)  | 4          | Paris         | +33 14 723 4404  |
+| Loui      | Bondur    |           1337 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Gerard    | Hernandez |           1370 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Pamela    | Castillo  |           1401 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Martin    | Gerard    |           1702 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Mami      | Nishi     |           1621 | Sales Rep            | 5          | Tokyo         | +81 33 224 5000  |
+| Yoshimi   | Kato      |           1625 | Sales Rep            | 5          | Tokyo         | +81 33 224 5000  |
+| William   | Patterson |           1088 | Sales Manager (APAC) | 6          | Sydney        | +61 2 9264 2451  |
+| Andy      | Fixter    |           1611 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Peter     | Marsh     |           1612 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Tom       | King      |           1619 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Larry     | Bott      |           1501 | Sales Rep            | 7          | London        | +44 20 7877 2041 |
+| Barry     | Jones     |           1504 | Sales Rep            | 7          | London        | +44 20 7877 2041 |
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+23 rows in set (0.004 sec)
+
+MariaDB [dbtugas5]> SELECT e.firstName, e.lastName, e.employeeNumber, e.jobTitle, o.officeCode, o.city, o.phone
+    -> FROM employees as e
+    -> LEFT JOIN offices as o
+    -> ON e.officeCode = o.officeCode;
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+| firstName | lastName  | employeeNumber | jobTitle             | officeCode | city          | phone            |
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+| Diane     | Murphy    |           1002 | President            | 1          | San Francisco | +1 650 219 4782  |
+| Mary      | Patterson |           1056 | VP Sales             | 1          | San Francisco | +1 650 219 4782  |
+| Jeff      | Firrelli  |           1076 | VP Marketing         | 1          | San Francisco | +1 650 219 4782  |
+| William   | Patterson |           1088 | Sales Manager (APAC) | 6          | Sydney        | +61 2 9264 2451  |
+| Gerard    | Bondur    |           1102 | Sale Manager (EMEA)  | 4          | Paris         | +33 14 723 4404  |
+| Anthony   | Bow       |           1143 | Sales Manager (NA)   | 1          | San Francisco | +1 650 219 4782  |
+| Leslie    | Jennings  |           1165 | Sales Rep            | 1          | San Francisco | +1 650 219 4782  |
+| Leslie    | Thompson  |           1166 | Sales Rep            | 1          | San Francisco | +1 650 219 4782  |
+| Julie     | Firrelli  |           1188 | Sales Rep            | 2          | Boston        | +1 215 837 0825  |
+| Steve     | Patterson |           1216 | Sales Rep            | 2          | Boston        | +1 215 837 0825  |
+| Foon Yue  | Tseng     |           1286 | Sales Rep            | 3          | NYC           | +1 212 555 3000  |
+| George    | Vanauf    |           1323 | Sales Rep            | 3          | NYC           | +1 212 555 3000  |
+| Loui      | Bondur    |           1337 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Gerard    | Hernandez |           1370 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Pamela    | Castillo  |           1401 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
+| Larry     | Bott      |           1501 | Sales Rep            | 7          | London        | +44 20 7877 2041 |
+| Barry     | Jones     |           1504 | Sales Rep            | 7          | London        | +44 20 7877 2041 |
+| Andy      | Fixter    |           1611 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Peter     | Marsh     |           1612 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Tom       | King      |           1619 | Sales Rep            | 6          | Sydney        | +61 2 9264 2451  |
+| Mami      | Nishi     |           1621 | Sales Rep            | 5          | Tokyo         | +81 33 224 5000  |
+| Yoshimi   | Kato      |           1625 | Sales Rep            | 5          | Tokyo         | +81 33 224 5000  |
+| Martin    | Gerard    |           1702 | Sales Rep            | 4          | Paris         | +33 14 723 4404  |
++-----------+-----------+----------------+----------------------+------------+---------------+------------------+
+23 rows in set (0.001 sec)
+
