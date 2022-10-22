@@ -1,0 +1,154 @@
+-- TUGAS 7
+-- Buat fungsi inputPegawai(8 parameter...), setelah itu panggil fungsinya
+-- Buat fungsi showPegawai(), setelah itu panggil fungsinya
+-- Buat fungsi inputGaji(3 parameter[gapok, tunjab dan pegawai_id]), setelah itu panggil fungsinya
+-- Buat fungsi showGaji(), setelah itu panggil fungsinya
+-- Buat fungsi totalGaji(in gapok, in tunjab, out total), setelah itu panggil fungsinya
+
+-- tampilkan slip gaji
+-- SELECT pegawai.nip, pegawai.nama, jabatan.nama AS posisi, divisi.nama AS departemen,
+-- gaji.gapok, gaji.tunjab, SELECT @totalGaji(parameter2...) FROM pegawai
+-- INNER JOIN ke tabel gaji, divisi dan jabatan
+
+-- buatkan query panjang di atas menjadi sebuah view baru: slip_gaji_pegawai_vw
+
+create table pegawai (
+nip varchar (9) primary key,
+nama varchar (32),
+tempat_lahir varchar (50),
+tgl_lahir datetime,
+jenis_kelamin varchar(15),
+alamat varchar (50),
+no_telp varchar(13),
+tgl_masuk date
+)
+
+
+create table divisi (
+iddivisi varchar(6),
+nama varchar(30),
+nip_pegawai varchar(9),
+foreign key (nip_pegawai) references pegawai(nip)
+)
+
+create table jabatan (
+id_jabatan varchar(6),
+nama_jabatan varchar (32),
+nip_pegawai varchar(9),
+primary key (id_jabatan),
+foreign key (nip_pegawai) references pegawai(nip)
+)
+
+create table gaji (
+no_slip int auto_increment,
+tunjangan int,
+gaji_pokok int,
+nip_pegawai varchar(9),
+primary key (no_slip),
+foreign key (nip_pegawai) references pegawai(nip)
+)
+
+DELIMITER $$
+CREATE PROCEDURE inputPegawai(
+nip varchar (9),
+nama varchar (32),
+tempat_lahir varchar (50),
+tgl_lahir datetime,
+jenis_kelamin enum('L','P'),
+alamat varchar (50),
+no_telp varchar(13),
+tgl_masuk date
+)
+BEGIN
+    INSERT INTO pegawai VALUES (nextval(id_peg),nama,tempat_lahir,tgl_lahir,jenis_kelamin,alamat,no_telp,tgl_masuk);
+END;
+$$
+
+alter table pegawai
+modify jenis_kelamin enum('L','P');
+
+DELIMITER $$
+CREATE PROCEDURE inputDivisi(
+iddivisi varchar(6),
+nama varchar(30),
+nip_pegawai varchar(9),
+)
+BEGIN
+    INSERT INTO pegawai VALUES ('iddivisi','nama','nip_pegawai');
+END;
+$$
+
+DELIMITER $$
+CREATE PROCEDURE inputJabatan(
+id_jabatan varchar(6),
+nama_jabatan varchar (32),
+nip_pegawai varchar(9),
+primary key (id_jabatan),
+)
+BEGIN
+    INSERT INTO pegawai VALUES ('id_jabatan','nama_jabatan','nip_pegawai');
+END;
+$$
+
+DELIMITER $$
+CREATE PROCEDURE inputJabatan(
+no_slip int auto_increment,
+tunjangan int,
+gaji_pokok int,
+nip_pegawai varchar(9)
+)
+BEGIN
+    INSERT INTO pegawai VALUES ('no_slip','tunjangan','gaji_pokok','nip_pegawai');
+END;
+$$
+
+CREATE OR REPLACE SEQUENCE id_peg
+  START WITH 1
+  INCREMENT BY 1;
+
+
+call inputPegawai('Fahmi', 'Sukabumi', '2001-02-27','L', 'Surabaya', '0895405491234','2020-02-02');
+
+DELIMITER $$
+CREATE PROCEDURE showPegawai()
+BEGIN
+	SELECT *  FROM pegawai;
+END $$
+DELIMITER ;
+
+call showPegawai;
+
+call inputGaji(5000000, 500000, 1);
+
+DELIMITER $$
+CREATE PROCEDURE showGaji()
+BEGIN
+	SELECT *  FROM gaji;
+END $$
+DELIMITER ;
+
+call showGaji();
+
+DELIMITER $$
+CREATE OR REPLACE totalGaji(
+IN Gapok INT,
+IN tunjangan INT.
+OUT total INT)
+BEGIN 
+  SELECT Gapok + Tunjangan
+  FROM gaji;
+END $$
+DELIMITER ;
+
+CALL totalGaji(5000000,500000,@total)
+SELECT @total;
+
+
+CREATE VIEW totGaji AS
+SELECT p.nip, p.nama, j.nama_jabatan AS posisi, d.nama AS departemen, g.Gapok, g.tunjungan, (g.Gapok + g.tunjungan) AS totalGaji
+FROM pegawai AS p
+INNER JOIN gaji AS g ON p.nip = g.nip_pegawai
+INNER JOIN divisi AS d ON p.nip = d.nip_pegawai
+INNER JOIN jabatan AS j ON p.nip = j.nip_pegawai;
+
+SELECT * FROM totgaji;
