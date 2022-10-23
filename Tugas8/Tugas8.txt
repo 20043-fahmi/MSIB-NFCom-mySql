@@ -1,0 +1,110 @@
+Fahmi@DESKTOP-LLOO4EL c:\xampp
+# mysql -u root -p dbrental_bus < C:\dbrentalbus.sql
+Enter password: *********
+
+Fahmi@DESKTOP-LLOO4EL c:\xampp
+# mysql -u root -p
+Enter password: *********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 86
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dbrental_bus       |
+| dbtugas5           |
+| dbtugas7           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> use dbrental_bus;
+Database changed
+
+DROP TRIGGER IF EXISTS `transaksi_batal`;
+
+//Membuat trigger untuk transaksi
+
+DELIMITER //
+CREATE TRIGGER `transaksi_batal` AFTER DELETE ON `transaksi`
+ FOR EACH ROW BEGIN
+UPDATE kendaraan SET status = 'Bebas'
+WHERE id = OLD.idkendaraan;
+UPDATE sopir SET status = 'Bebas'
+WHERE id = OLD.idsopir;
+END
+//
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS `transaksi_mulai`;
+DELIMITER //
+CREATE TRIGGER `transaksi_mulai` AFTER INSERT ON `transaksi`
+ FOR EACH ROW BEGIN
+UPDATE kendaraan SET status = 'Jalan'
+WHERE id = NEW.idkendaraan;
+UPDATE sopir SET status = 'Jalan'
+WHERE id = NEW.idsopir;
+END
+//
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS `transaksi_selesai`;
+DELIMITER //
+CREATE TRIGGER `transaksi_selesai` AFTER UPDATE ON `transaksi`
+ FOR EACH ROW BEGIN
+UPDATE kendaraan SET status = 'Bebas'
+WHERE id = OLD.idkendaraan;
+UPDATE sopir SET status = 'Bebas'
+WHERE id = OLD.idsopir;
+END
+//
+DELIMITER ;
+
+/Hasil query memperlihatkan bagaimana trigger bekerja dengan inputan yang telah di masukan sebelum nya
+
+MariaDB [dbrental_bus]> select * from transaksi;
++----+-------------+---------+-------------+------------+------------+----------+-------------+-------------+----------+---------+
+| id | idpelanggan | idsopir | idkendaraan | tglmulai   | tglselesai | lamasewa | tglovertime | jmlovertime | total    | status  |
++----+-------------+---------+-------------+------------+------------+----------+-------------+-------------+----------+---------+
+|  1 |           1 |       1 |           1 | 2015-06-01 | 2015-06-05 |        5 | NULL        |        NULL |  5000000 | Selesai |
+|  2 |           4 |       3 |           2 | 2015-07-01 | 2015-07-03 |        3 | 2015-07-09  |           6 | 18600000 | Selesai |
+|  3 |           5 |       3 |           3 | 2015-07-27 | 2015-07-31 |        5 | 2015-08-01  |           1 | 18300000 | Mulai   |
+|  4 |           2 |       1 |           1 | 2015-07-19 | 2015-07-23 |        5 | 2015-07-25  |           2 |  7000000 | Mulai   |
+|  5 |           1 |       1 |           1 | 2015-07-05 | 2015-07-08 |        4 | 2015-07-11  |           3 |  7000000 | Mulai   |
++----+-------------+---------+-------------+------------+------------+----------+-------------+-------------+----------+---------+
+5 rows in set (0.003 sec)
+
+MariaDB [dbrental_bus]>
+
+
+Fahmi@DESKTOP-LLOO4EL c:\xampp
+# mysqldump -u root -p dbrental_bus > dbbackup_rentalbus.sql
+Enter password: *********
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| dbbackup_rentalbus |
+| dbrental_bus       |
+| dbtugas5           |
+| dbtugas7           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+8 rows in set (0.001 sec)
+
+//Membackup database ke dbbackup_rentalbus.sql
+C:\xampp\mysql\bin>mysqldump -u root -p dbrental_bus > C:\dbbackup_rentalbus.sql
+Enter password: *********
